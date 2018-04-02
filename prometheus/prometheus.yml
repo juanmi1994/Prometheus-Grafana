@@ -14,21 +14,25 @@ rule_files:
 # A scrape configuration containing exactly one endpoint to scrape.
 scrape_configs:
   - job_name: 'Prometheus'
-    scrape_interval: 5s
+    scrape_interval: 1s
     static_configs:
       - targets: ['localhost:9090']
  
-  - job_name: 'Containers'
+  - job_name: 'Nodeexporter'
     scrape_interval: 5s
     static_configs:
       - targets: ['nodeexporter:9100']
-      - targets: ['172.17.0.2:9100']
+       
+  - job_name: 'Containers'
+    scrape_interval: 5s
+    static_configs:
+      - targets: ['172.17.0.2:80']
         labels:
          alias: 'Web'
-      - targets: ['172.17.0.3:9100']
+      - targets: ['172.17.0.3:8002']
         labels:
          alias: 'Correo'
-      - targets: ['172.17.0.4:9100']
+      - targets: ['172.17.0.4:8003']
         labels:
          alias: 'Mysql'
 
